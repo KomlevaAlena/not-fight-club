@@ -1,5 +1,3 @@
-# Gulp сборка для верстки сайтов от [ВебКадеми](https://webcademy.ru)
-
 - HTML,
 - SCSS,
 - Gulp,
@@ -21,5 +19,3 @@ gulp
 ```
 gulp docs
 ```
-
-[Смотреть демо](https://user.github.io/repo/)

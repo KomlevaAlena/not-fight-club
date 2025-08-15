@@ -1,0 +1,1 @@
+!function(){"use strict";window.addEventListener("DOMContentLoaded",(()=>{window.addEventListener("load",(()=>{document.getElementById("start-game-btn").addEventListener("click",(()=>window.open("./blocks/home.html")))}))}))}();

@@ -4,7 +4,6 @@ const replace = require('gulp-replace');
 // HTML
 const fileInclude = require('gulp-file-include');
 const htmlclean = require('gulp-htmlclean');
-const webpHTML = require('gulp-webp-retina-html');
 const typograf = require('gulp-typograf');
 
 // SASS
@@ -12,7 +11,6 @@ const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
 const autoprefixer = require('gulp-autoprefixer');
 const csso = require('gulp-csso');
-// const webImagesCSS = require('gulp-web-images-css');  //Вывод WEBP-изображений
 
 const server = require('gulp-server-livereload');
 const clean = require('gulp-clean');
@@ -27,7 +25,6 @@ const changed = require('gulp-changed');
 
 // Images
 const imagemin = require('gulp-imagemin');
-const imageminWebp = require('imagemin-webp');
 const extReplace = require('gulp-ext-replace');
 
 // SVG
@@ -80,14 +77,11 @@ gulp.task('html:docs', function () {
 			})
 		)
 		.pipe(
-			webpHTML({
-				extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-				retina: {
-					1: '',
-					2: '@2x',
-				},
-			})
-		)
+			replace(
+				/(<img[^>]*src=")([^"]*)("[^>]*>)/gi,
+				'$1$2$3'
+			)
+)
 		.pipe(htmlclean())
 		.pipe(gulp.dest('./docs/'));
 });
@@ -102,11 +96,6 @@ gulp.task('sass:docs', function () {
 		.pipe(sassGlob())
 		.pipe(groupMedia())
 		.pipe(sass())
-		// .pipe(
-		// 	webImagesCSS({
-		// 		mode: 'webp',
-		// 	})
-		// )
 		.pipe(
 			replace(
 				/(['"]?)(\.\.\/)+(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
@@ -119,31 +108,23 @@ gulp.task('sass:docs', function () {
 });
 
 gulp.task('images:docs', function () {
-	return gulp
-		.src(['./src/img/**/*', '!./src/img/svgicons/**/*'])
-		.pipe(changed('./docs/img/'))
-		.pipe(
-			imagemin([
-				imageminWebp({
-					quality: 85,
-				}),
-			])
-		)
-		.pipe(extReplace('.webp'))
-		.pipe(gulp.dest('./docs/img/'))
-		.pipe(gulp.src('./src/img/**/*'))
-		.pipe(changed('./docs/img/'))
-		.pipe(
-			imagemin(
-				[
-					imagemin.gifsicle({ interlaced: true }),
-					imagemin.mozjpeg({ quality: 85, progressive: true }),
-					imagemin.optipng({ optimizationLevel: 5 }),
-				],
-				{ verbose: true }
-			)
-		)
-		.pipe(gulp.dest('./docs/img/'));
+  return gulp
+    .src(['./src/img/**/*', '!./src/img/svgicons/**/*'])
+    .pipe(changed('./docs/img/'))
+    .pipe(
+      imagemin([
+        imagemin.gifsicle({ interlaced: true }),
+        imagemin.mozjpeg({ quality: 85, progressive: true }),
+        imagemin.optipng({ optimizationLevel: 5 }),
+        imagemin.svgo({
+          plugins: [
+            { removeViewBox: true },
+            { cleanupIDs: false }
+          ]
+        })
+      ])
+    )
+    .pipe(gulp.dest('./docs/img/'));
 });
 
 const svgStack = {
@@ -216,6 +197,11 @@ const serverOptions = {
 	open: true,
 };
 
-gulp.task('server:docs', function () {
-	return gulp.src('./docs/').pipe(server(serverOptions));
+gulp.task('server:docs', function() {
+  return gulp.src('./docs/')
+    .pipe(server({
+      port: process.env.PORT || 8001, // Берет порт из process.env
+      livereload: true,
+      open: true
+    }));
 });

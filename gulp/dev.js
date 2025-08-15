@@ -42,7 +42,7 @@ const plumberNotify = (title) => {
 
 gulp.task('html:dev', function () {
 	return gulp
-		.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
+		.src(['./src/html/**/*.html'])
 		.pipe(changed('./build/', { hasChanged: changed.compareContents }))
 		.pipe(plumber(plumberNotify('HTML')))
 		.pipe(fileInclude(fileIncludeSetting))
@@ -173,8 +173,13 @@ const serverOptions = {
 	open: true,
 };
 
-gulp.task('server:dev', function () {
-	return gulp.src('./build/').pipe(server(serverOptions));
+gulp.task('server:dev', function() {
+  return gulp.src('./build/')
+    .pipe(server({
+      port: process.env.PORT || 8000, // Берет порт из process.env
+      livereload: true,
+      open: true
+    }));
 });
 
 gulp.task('watch:dev', function () {

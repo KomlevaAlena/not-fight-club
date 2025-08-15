@@ -1,5 +1,9 @@
-import mobileNav from './modules/mobile-nav.js';
-mobileNav();
+// import mobileNav from './modules/mobile-nav.js';
+import {openHome} from './modules/open-home.js';
 
-// import isAvifWebp from 'avif-webp-checker';
-// isAvifWebp({ mode: 'webp' });
+window.addEventListener('DOMContentLoaded', () => {
+
+  window.addEventListener('load', () => {
+    openHome();
+  });
+});

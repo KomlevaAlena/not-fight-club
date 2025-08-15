@@ -1,0 +1,102 @@
+body {
+    // background-color: $color-black;
+    // color: $color-white;
+    font-family: $font-roboto;
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 22px;
+    letter-spacing: 0.09em;
+    text-align: center;
+}
+
+.section {
+    width: 100%;
+}
+
+.list {
+    list-style: none;
+}
+
+.link {
+    color: $color-white;
+    text-decoration: none;
+    font-family: $font-roboto;
+    font-size: 22px;
+    font-weight: 100;
+    line-height: 22px;
+    letter-spacing: 0.09em;
+    text-align: left;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        color: $color-font-gd;
+        border: none;
+        outline: none;
+    }
+
+    &:active {
+        color: $color-active-gd;
+        border: none;
+        outline: none;
+    }
+}
+
+.button {
+    color: $color-white;
+    text-decoration: none;
+    font-family: $font-roboto;
+    font-size: 22px;
+    font-weight: 100;
+    line-height: 22px;
+    text-align: center;
+    display: block;
+}
+
+.title {
+    color: $color-white;
+    font-family: $font-roboto;
+    text-transform: uppercase;
+}
+
+h2.title {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 50px;
+    letter-spacing: 0.06em;
+    color: $color-bg-dark;
+
+    // @include desc-small {
+    //     font-size: 50px;
+    //     line-height: 90px;
+    //     letter-spacing: 0.1em;
+    // }
+
+    // @include tablet {
+    //     font-size: 40px;
+    //     line-height: 150%;
+    //     letter-spacing: 0.12em;
+    // }
+
+    // @include mobile {
+    //     font-size: 28px;
+    //     line-height: 143%;
+    //     letter-spacing: 0.18em;
+    // }
+}
+
+// h2.title.title-light {
+//     color: $color-white;
+// }
+
+legend {
+    font-family: $font-roboto;
+    font-weight: 700;
+    font-size: 28px;
+    color: $color-black;
+
+    // @include mobile {
+    //   font-size: 16px;
+    //   text-align: center;
+    // }
+}

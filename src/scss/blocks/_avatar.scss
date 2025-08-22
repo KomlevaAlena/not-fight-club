@@ -1,0 +1,84 @@
+.avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 50%;
+    height: max-content;
+    padding: 50px 0;
+    margin: 0 auto;
+    background-color: pink;
+    border: 1px solid black;
+}
+.avatar-modal {
+    border: 1px solid black;
+}
+
+.current-avatar {
+    width: 130px;
+    height: 305px;
+    border-radius: 3px;
+    object-fit: cover;
+    border: 3px solid #333;
+}
+
+.avatar__btn {
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.avatar-item {
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+    transform: scale(1.1);
+    }
+}
+
+
+.avatar-item img {
+    width: 130px;
+    height: 305px;;
+    border-radius: 3px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+
+    &:hover {
+    border-color: white;
+    }
+}
+
+.avatar-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}

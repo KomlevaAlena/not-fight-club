@@ -11,9 +11,30 @@
     @@include('../blocks/header.html')
     <body>
         <main class="main home-main">
-            <section class="home-page">
-                <h2 class="visually-hidden title">start game</h2>
+            <section class="home-page avatar">
+                <!-- <h2 class="visually-hidden title">start game</h2> -->
+                <h2 class="visually-hidden title">avatar</h2>
+                <div class="avatar-display">
+                    <img class="current-avatar" id="current-avatar" src="/img/war-1.jpg" alt="avatar">
+                </div>
+                <button class="avatar__btn" type="submit" id="avatar-btn">coose avatar</button>
+                <div class="avatar-selection" id="avatar-selection" style="display: none;">
+                    <div class="avatar-grid">
+                        <!-- JS -->
+                    </div>
+                </div>
                 <button class="home-page__btn fight-btn" type="submit" id="fight-btn">Fight!</button>
+                <!-- <div class="avatar-modal">
+                    <h3 class="visually-hidden title">choose avatar</h3>
+                    <button class="avatar__form-btn">
+                        <span class="visually-hidden">close</span>
+                    </button>
+                    <fieldset class="avatar--form">
+                        <legend class="visually-hidden title">Seting avatar</legend>
+                        <label for="character-avatar">Character avatar</label>
+                        <input type="text" placeholder="Yor face?" required id="character-avatar">
+                    </fieldset>
+                </div> -->
             </section>
         </main>
         <script src="/js/index.bundle.js"></script>

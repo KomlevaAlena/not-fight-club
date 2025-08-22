@@ -1,4 +1,4 @@
-export function initAvatarModal () {
+export function initAvatarModal() {
     const avatars = [
         '/img/war-1.jpg',
         '/img/war-2.jpg',
@@ -28,11 +28,19 @@ export function initAvatarModal () {
     const currentAvatar = document.getElementById('current-avatar');
     const changeBtn = document.getElementById('avatar-btn');
 
-    avatars.forEach((avatar, index) => {
+ 
+    const savedAvatar = localStorage.getItem('selectedAvatar');
+    if (savedAvatar) {
+        currentAvatar.src = savedAvatar;
+    }
+
+    avatars.forEach((avatar) => {
         const avatarItem = document.createElement('div');
+        avatarItem.className = 'avatar-item';
         avatarItem.innerHTML = `<img src="${avatar}" alt="Аватар" data-src="${avatar}">`;
         avatarGrid.appendChild(avatarItem);
     });
+
     changeBtn.addEventListener('click', () => {
         modal.style.display = 'block';
     });

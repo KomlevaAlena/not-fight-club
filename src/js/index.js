@@ -4,6 +4,7 @@ import { openCharacter } from './modules/character-open.js';
 import { openBattle } from './modules/battle-open.js';
 import { setingOpen } from './modules/seting-open.js';
 import { initAvatarModal } from './modules/avatar-choose.js';
+import { loadSelectedAvatar } from './modules/avatar-save.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   
@@ -13,12 +14,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (document.getElementById('fight-btn')) {
     openCharacter();
-    initAvatarModal();
+    
   }
 
   if (document.getElementById('to-attack-btn')) {
     openBattle();
   }
 
+  initAvatarModal();
+  loadSelectedAvatar();
   setingOpen();
 });

@@ -82,3 +82,11 @@
     border-radius: 10px;
     text-align: center;
 }
+
+.monster-avatar {
+    width: 305px;
+    height: 305px;
+    border-radius: 3px;
+    object-fit: cover;
+    border: 3px solid #333;
+}

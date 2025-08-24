@@ -3,19 +3,16 @@ import { openHome } from './modules/open-home.js';
 import { openCharacter } from './modules/character-open.js';
 import { openBattle } from './modules/battle-open.js';
 import { setingOpen } from './modules/seting-open.js';
-import { initAvatarModal } from './modules/avatar-choose.js';
-import { loadSelectedAvatar } from './modules/avatar-choose.js';
-// import { displayRandomMonster } from './modules/monsters.js';
+import { initAvatarModal, loadSelectedAvatar } from './modules/avatar-choose.js';
+import { displayRandomMonster } from './modules/monster-random.js';
 
 window.addEventListener('DOMContentLoaded', () => {
-  
   if (document.getElementById('start-game-btn')) {
     openHome();
   }
 
   if (document.getElementById('fight-btn')) {
     openCharacter();
-    
   }
 
   if (document.getElementById('to-attack-btn')) {
@@ -26,13 +23,18 @@ window.addEventListener('DOMContentLoaded', () => {
     initAvatarModal();
   }
 
-  
   loadSelectedAvatar();
-  // displayRandomMonster();
-  // document.getElementById('battle-btn').addEventListener('click', function() {
-  //         const monster = displayRandomMonster();
-  //         startBattle(monster);
-  //     });
+
+  if (document.getElementById('current-monster')) {
+    const monster = displayRandomMonster();
+
+    const battleBtn = document.getElementById('battle-btn');
+    if (battleBtn && monster) {
+      battleBtn.addEventListener('click', () => {
+        startBattle(monster);
+      });
+    }
+  }
 
   setingOpen();
 });

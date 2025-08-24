@@ -19,3 +19,5 @@ gulp
 ```
 gulp docs
 ```
+deploy:
+https://komlevaalena.github.io/not-fight-club/

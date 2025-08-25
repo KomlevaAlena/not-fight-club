@@ -5,7 +5,7 @@ function getBasePath() {
     if (hostname === 'localhost') {
         return pathname.includes('/pages/') ? '../img/' : './img/';
     } else {
-        return '/pages/img/';
+        return '/not-fight-club/docs/img/';
     }
 }
 

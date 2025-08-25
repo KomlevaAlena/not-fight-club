@@ -3,11 +3,11 @@ function getBasePath() {
     const pathname = window.location.pathname;
 
     if (hostname === 'localhost') {
-        // для дев-сервера путь относительно страницы
+        // Для локального дева и докс сервера
         return pathname.includes('/pages/') ? '../img/' : './img/';
     } else {
-        // для GitHub Pages и docs
-        return '/pages/img/';
+        // Для GitHub Pages
+        return '/not-fight-club/docs/img/';
     }
 }
 
@@ -23,7 +23,6 @@ function setAvatar(target, src) {
 
 export function initAvatarModal() {
     const BASE_PATH = getBasePath();
-
     const avatars = Array.from({ length: 10 }, (_, i) => `${BASE_PATH}war-${i + 1}.jpg`);
 
     const modal = document.createElement('div');
@@ -51,11 +50,7 @@ export function initAvatarModal() {
         avatarGrid.appendChild(avatarItem);
     });
 
-    if (changeBtn) {
-        changeBtn.addEventListener('click', () => {
-            modal.style.display = 'block';
-        });
-    }
+    if (changeBtn) changeBtn.addEventListener('click', () => modal.style.display = 'block');
 
     avatarGrid.addEventListener('click', (e) => {
         if (e.target.tagName === 'IMG') {
@@ -79,6 +74,5 @@ export function loadSelectedAvatar() {
     const avatarDisplay = document.getElementById('current-avatar');
     const savedAvatar = localStorage.getItem('selectedAvatar');
     const defaultAvatar = `${BASE_PATH}war-1.jpg`;
-
     setAvatar(avatarDisplay, savedAvatar || defaultAvatar);
 }

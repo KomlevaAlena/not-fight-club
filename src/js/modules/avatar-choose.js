@@ -1,3 +1,8 @@
+const BASE_PATH = (() => {
+  const host = window.location.hostname;
+  return (['localhost', '127.0.0.1', '::1'].includes(host)) ? '/img/' : '/pages/img/';
+})();
+
 function setAvatar(target, src) {
     if (!target || !src) return;
 
@@ -10,16 +15,16 @@ function setAvatar(target, src) {
 
 export function initAvatarModal() {
     const avatars = [
-        '/img/war-1.jpg',
-        '/img/war-2.jpg',
-        '/img/war-3.jpg',
-        '/img/war-4.jpg',
-        '/img/war-5.jpg',
-        '/img/war-6.jpg',
-        '/img/war-7.jpg',
-        '/img/war-8.jpg',
-        '/img/war-9.jpg',
-        '/img/war-10.jpg'
+        `${BASE_PATH}war-1.jpg`,
+        `${BASE_PATH}war-2.jpg`,
+        `${BASE_PATH}war-3.jpg`,
+        `${BASE_PATH}war-4.jpg`,
+        `${BASE_PATH}war-5.jpg`,
+        `${BASE_PATH}war-6.jpg`,
+        `${BASE_PATH}war-7.jpg`,
+        `${BASE_PATH}war-8.jpg`,
+        `${BASE_PATH}war-9.jpg`,
+        `${BASE_PATH}war-10.jpg`
     ];
 
     const modal = document.createElement('div');
@@ -38,9 +43,7 @@ export function initAvatarModal() {
     const changeBtn = document.getElementById('avatar-btn');
 
     const savedAvatar = localStorage.getItem('selectedAvatar');
-    if (savedAvatar) {
-        setAvatar(currentAvatar, savedAvatar);
-    }
+    if (savedAvatar) setAvatar(currentAvatar, savedAvatar);
 
     avatars.forEach((avatar) => {
         const avatarItem = document.createElement('div');
@@ -65,23 +68,16 @@ export function initAvatarModal() {
     });
 
     const closeBtn = modal.querySelector('.close-modal');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-    }
+    if (closeBtn) closeBtn.addEventListener('click', () => modal.style.display = 'none');
 
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
+        if (e.target === modal) modal.style.display = 'none';
     });
 }
 
 export function loadSelectedAvatar() {
     const avatarDisplay = document.getElementById('current-avatar');
     const savedAvatar = localStorage.getItem('selectedAvatar');
-    const defaultAvatar = '/img/war-1.jpg';
-
+    const defaultAvatar = `${BASE_PATH}war-1.jpg`;
     setAvatar(avatarDisplay, savedAvatar || defaultAvatar);
 }

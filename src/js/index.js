@@ -5,6 +5,7 @@ import { openBattle } from './modules/battle-open.js';
 import { setingOpen } from './modules/seting-open.js';
 import { initAvatarModal, loadSelectedAvatar } from './modules/avatar-choose.js';
 import { displayRandomMonster } from './modules/monster-random.js';
+import { initCharacterName } from './modules/name-save.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('start-game-btn')) {
@@ -36,5 +37,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  initCharacterName();
   setingOpen();
 });

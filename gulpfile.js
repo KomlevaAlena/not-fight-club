@@ -22,7 +22,7 @@ gulp.task(
       'html:dev',
       'sass:dev',
       'images:dev',
-      gulp.series('svgStack:dev', 'svgSymbol:dev'),
+      'svgSymbol:dev',
       'files:dev',
       'js:dev'
     ),
@@ -46,7 +46,7 @@ gulp.task(
       'html:docs',
       'sass:docs',
       'images:docs',
-      gulp.series('svgStack:docs', 'svgSymbol:docs'),
+      'svgSymbol:docs',
       'files:docs',
       'js:docs'
     ),

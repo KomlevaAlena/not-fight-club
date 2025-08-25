@@ -1,7 +1,15 @@
-const BASE_PATH = (() => {
-  const host = window.location.hostname;
-  return (['localhost', '127.0.0.1', '::1'].includes(host)) ? '/img/' : '/pages/img/';
-})();
+function getBasePath() {
+    const hostname = window.location.hostname;
+    const pathname = window.location.pathname;
+
+    if (hostname === 'localhost') {
+        return pathname.includes('/pages/') ? '../img/' : './img/';
+    } else {
+        return '/pages/img/';
+    }
+}
+
+const BASE_PATH = getBasePath();
 
 export function monsterRandom() {
     const monsters = [
@@ -19,7 +27,7 @@ export function displayRandomMonster() {
     const monsterElement = document.getElementById('current-monster');
     const monsterNameElement = document.querySelector('.monster-info span');
 
-    if (!monsterElement) return null;
+    if (!monsterElement) return null; // защита от страниц без блока монстра
 
     const monster = monsterRandom();
 
@@ -28,7 +36,7 @@ export function displayRandomMonster() {
     if (monsterNameElement) monsterNameElement.textContent = monster.name;
 
     localStorage.setItem('currentMonster', JSON.stringify(monster));
-
     console.log('Появился монстр:', monster.name);
+
     return monster;
 }

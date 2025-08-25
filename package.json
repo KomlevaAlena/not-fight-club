@@ -1,7 +1,8 @@
 {
 	"devDependencies": {
-		"@babel/core": "^7.22.5",
-		"@babel/preset-env": "^7.22.5",
+		"@babel/core": "^7.28.3",
+		"@babel/preset-env": "^7.28.3",
+		"babel-loader": "^10.0.0",
 		"browser-sync": "^3.0.4",
 		"css-loader": "^6.8.1",
 		"gulp": "^4.0.2",

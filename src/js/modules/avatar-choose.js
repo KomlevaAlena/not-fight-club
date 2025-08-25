@@ -1,7 +1,15 @@
-const BASE_PATH = (() => {
-  const host = window.location.hostname;
-  return (['localhost', '127.0.0.1', '::1'].includes(host)) ? '/img/' : '/pages/img/';
-})();
+function getBasePath() {
+    const hostname = window.location.hostname;
+    const pathname = window.location.pathname;
+
+    if (hostname === 'localhost') {
+        // для дев-сервера путь относительно страницы
+        return pathname.includes('/pages/') ? '../img/' : './img/';
+    } else {
+        // для GitHub Pages и docs
+        return '/pages/img/';
+    }
+}
 
 function setAvatar(target, src) {
     if (!target || !src) return;
@@ -14,18 +22,9 @@ function setAvatar(target, src) {
 }
 
 export function initAvatarModal() {
-    const avatars = [
-        `${BASE_PATH}war-1.jpg`,
-        `${BASE_PATH}war-2.jpg`,
-        `${BASE_PATH}war-3.jpg`,
-        `${BASE_PATH}war-4.jpg`,
-        `${BASE_PATH}war-5.jpg`,
-        `${BASE_PATH}war-6.jpg`,
-        `${BASE_PATH}war-7.jpg`,
-        `${BASE_PATH}war-8.jpg`,
-        `${BASE_PATH}war-9.jpg`,
-        `${BASE_PATH}war-10.jpg`
-    ];
+    const BASE_PATH = getBasePath();
+
+    const avatars = Array.from({ length: 10 }, (_, i) => `${BASE_PATH}war-${i + 1}.jpg`);
 
     const modal = document.createElement('div');
     modal.className = 'avatar-modal';
@@ -76,8 +75,10 @@ export function initAvatarModal() {
 }
 
 export function loadSelectedAvatar() {
+    const BASE_PATH = getBasePath();
     const avatarDisplay = document.getElementById('current-avatar');
     const savedAvatar = localStorage.getItem('selectedAvatar');
     const defaultAvatar = `${BASE_PATH}war-1.jpg`;
+
     setAvatar(avatarDisplay, savedAvatar || defaultAvatar);
 }
